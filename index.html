@@ -1,19 +1,192 @@
 <!DOCTYPE html>
-  <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENZO SOUND</title>
-    <style>
-      body { margin: 0; background: #111; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    h1 { font-size: 3rem; letter-spacing: 0.2em; }
-    p { text-align: center; color: #aaa; }
-      </style>
-        </head>
-        <body>
-          <div>
-            <h1>BENZO SOUND</h1>
-            <p>ホームページ 準備中</p>
-          </div>
-        </body>
-        </html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BENZO-SOUND | 機材レンタル・音響設計</title>
+<style>
+  :root { --navy: #1a2744; --gold: #c9a227; --gold-light: #e8c558; --white: #ffffff; --gray: #f5f5f5; --text: #222222; --text-light: #666666; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif; color: var(--text); background: var(--white); }
+  nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.98); border-bottom: 3px solid var(--gold); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 72px; box-shadow: 0 2px 16px rgba(26,39,68,0.08); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 100%; }
+  .nav-logo img { height: 52px; width: auto; object-fit: contain; }
+  .nav-logo-text { font-size: 1.7rem; font-weight: 900; letter-spacing: 2px; color: var(--navy); font-family: Georgia, serif; text-transform: uppercase; }
+  .nav-logo-text span { color: var(--gold); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  .hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 20px 60px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, #243560 0%, #0f1a32 70%); }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-logo-wrap { width: 180px; height: 180px; margin: 0 auto 28px; background: #000; border-radius: 50%; border: 3px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: 900; color: var(--gold); letter-spacing: -1px; line-height: 1; }
+  .hero-logo-wrap .logo-sub { font-size: 0.6rem; color: #8899bb; letter-spacing: 3px; display: block; margin-top: 2px; }
+  .hero h1 { font-size: clamp(2rem, 6vw, 3.8rem); color: var(--white); font-weight: 900; letter-spacing: 4px; line-height: 1.1; margin-bottom: 16px; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: clamp(0.9rem, 2vw, 1.1rem); color: #aabbcc; max-width: 520px; margin: 0 auto 36px; line-height: 1.8; }
+  .btn { display: inline-block; padding: 14px 36px; background: var(--gold); color: var(--navy); font-weight: 800; font-size: 0.95rem; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; }
+  .btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); margin-left: 12px; }
+  .btn-outline:hover { background: var(--gold); color: var(--navy); }
+  section { padding: 80px 40px; }
+  .section-title { text-align: center; margin-bottom: 48px; }
+  .section-title h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--navy); font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+  .section-title .gold-line { width: 48px; height: 3px; background: var(--gold); margin: 10px auto 0; }
+  .section-title p { color: var(--text-light); margin-top: 12px; font-size: 0.95rem; }
+  .eq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; max-width: 1100px; margin: 0 auto; }
+  .eq-category { border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; transition: box-shadow 0.2s; }
+  .eq-category:hover { box-shadow: 0 8px 32px rgba(26,39,68,0.12); }
+  .eq-cat-header { background: var(--navy); padding: 18px 24px; display: flex; align-items: center; gap: 12px; }
+  .eq-cat-icon { font-size: 1.6rem; }
+  .eq-cat-header h3 { color: var(--white); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+  .eq-cat-header span { color: var(--gold); font-size: 0.75rem; display: block; margin-top: 2px; }
+  .eq-items { padding: 20px 24px; }
+  .eq-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+  .eq-item:last-child { border-bottom: none; }
+  .eq-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+  .eq-spec { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
+  .eq-qty { background: var(--gold); color: var(--navy); font-weight: 800; font-size: 0.75rem; padding: 3px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+  #pricing { background: var(--gray); }
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto 32px; }
+  .price-card { background: var(--white); border-radius: 4px; padding: 28px 24px; text-align: center; border-top: 4px solid var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .price-card h3 { font-size: 0.85rem; letter-spacing: 2px; color: var(--text-light); text-transform: uppercase; margin-bottom: 12px; }
+  .price-card .price { font-size: 1.6rem; font-weight: 900; color: var(--navy); }
+  .price-card .price-unit { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
+  .price-card ul { list-style: none; margin-top: 16px; text-align: left; }
+  .price-card ul li { font-size: 0.82rem; padding: 4px 0; color: var(--text); }
+  .price-card ul li::before { content: '✓ '; color: var(--gold); font-weight: bold; }
+  .price-note { text-align: center; color: var(--text-light); font-size: 0.82rem; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+  .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
+  .work-card { border: 1px solid #e8e8e8; border-radius: 4px; overflow: hidden; }
+  .work-thumb { height: 140px; background: var(--navy); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .work-thumb-icon { font-size: 3rem; opacity: 0.4; }
+  .work-badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: var(--navy); font-size: 0.7rem; font-weight: 800; padding: 3px 8px; letter-spacing: 1px; }
+  .work-body { padding: 20px 22px; }
+  .work-body h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+  .work-body p { font-size: 0.83rem; color: var(--text-light); line-height: 1.7; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .work-tag { font-size: 0.72rem; padding: 3px 8px; border: 1px solid var(--navy); color: var(--navy); border-radius: 2px; }
+  #contact { background: var(--navy); }
+  #contact .section-title h2 { color: var(--white); }
+  #contact .section-title p { color: #8899bb; }
+  .contact-wrap { max-width: 680px; margin: 0 auto; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.8rem; color: #8899bb; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--white); border-radius: 2px; font-size: 0.9rem; font-family: inherit; transition: border 0.2s; outline: none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--navy); }
+  .form-group textarea { height: 120px; resize: vertical; }
+  .btn-submit { width: 100%; padding: 15px; background: var(--gold); color: var(--navy); font-weight: 800; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+  .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .sns-links { display: flex; justify-content: center; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+  .sns-btn { padding: 11px 24px; border-radius: 2px; font-weight: 700; font-size: 0.85rem; text-decoration: none; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+  .sns-btn.line { background: #06C755; color: white; }
+  .sns-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: white; }
+  .sns-btn.x { background: #000; color: white; border: 1px solid #333; }
+  .sns-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+  .terms-block { background: var(--white); border-radius: 4px; padding: 28px 32px; margin-bottom: 16px; border-left: 4px solid var(--gold); }
+  .terms-block h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; letter-spacing: 1px; }
+  .terms-block ul { padding-left: 20px; }
+  .terms-block ul li { font-size: 0.88rem; line-height: 1.9; color: var(--text); }
+  .terms-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.86rem; }
+  .terms-table th { background: var(--navy); color: var(--white); padding: 10px 16px; text-align: left; font-weight: 700; }
+  .terms-table td { padding: 10px 16px; border-bottom: 1px solid #eee; }
+  .terms-table tr:last-child td { border-bottom: none; }
+  .terms-table tr:nth-child(even) td { background: var(--gray); }
+  footer { background: #0a1020; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .foot-logo { font-size: 1.1rem; font-weight: 900; color: var(--gold); letter-spacing: 2px; }
+  .foot-logo span { color: #8899bb; font-size: 0.7rem; display: block; margin-top: 2px; letter-spacing: 3px; }
+  footer p { font-size: 0.75rem; color: #556; }
+  @media (max-width: 640px) { nav { padding: 10px 16px; } .nav-links { gap: 14px; } .nav-links a { font-size: 0.72rem; } section { padding: 60px 16px; } .form-row { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="benzo-sound-logo.png" alt="BENZO-SOUND" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="nav-logo-text" style="display:none;">BENZO<span>-</span>SOUND</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#equipment">機材</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#works">実績</a></li>
+    <li><a href="#terms">レンタル規約</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo-wrap"><div><span style="font-size:1rem;letter-spacing:1px;">BENZO</span><br><span style="font-size:0.8rem;color:var(--gold);">SOUND</span><span class="logo-sub">AUDIO DESIGN</span></div></div>
+    <h1>PROFESSIONAL<br><span>SOUND RENTAL</span></h1>
+    <p>プロ仕様のPA機材・DJ機材を沖縄本島全域へ。<br>DJイベント・Live・各種パーティー・施設設置まで対応。</p>
+    <a href="#contact" class="btn">見積もり・お問い合わせ</a>
+    <a href="#equipment" class="btn btn-outline">機材を見る</a>
+  </div>
+</section>
+<section id="equipment">
+  <div class="section-title"><h2>Equipment</h2><div class="gold-line"></div><p>プロ仕様機材をすべてレンタル可能</p></div>
+  <div class="eq-grid">
+    <div class="eq-category"><div class="eq-cat-header"><span class="eq-cat-icon">🔊</span><div><h3>PA Speakers</h3><span>PAスピーカー</span></div></div><div class="eq-items"><div class="eq-item"><div><div class="eq-name">Electro-Voice ZX1-90</div><div class="eq-spec">8インチ 2-way フルレンジ / 90°×50° / 200W RMS</div></div><span class="eq-qty">×2</span></div><div class="eq-item"><div><div class="eq-name">Electro-Voice Sb122</div><div class="eq-spec">12インチ サブウーファー / 800W RMS</div></div><span class="eq-qty">×4</span></div><div class="eq-item"><div><div class="eq-name">Electro-Voice Everse 8</div><div class="eq-spec">8インチ バッテリー内蔵 アクティブ / IP43防塵防水</div></div><span class="eq-qty">×2</span></div></div></div>
+    <div class="eq-category"><div class="eq-cat-header"><span class="eq-cat-icon">🎛️</span><div><h3>DJ Equipment</h3><span>DJ機材</span></div></div><div class="eq-items"><div class="eq-item"><div><div class="eq-name">Pioneer DJM-A9</div><div class="eq-spec">4ch プロフェッショナル デジタルDJミキサー</div></div><span class="eq-qty">×1</span></div><div class="eq-item"><div><div class="eq-name">Pioneer CDJ-3000</div><div class="eq-spec">プロフェッショナルマルチプレーヤー</div></div><span class="eq-qty">×2</span></div><div class="eq-item"><div><div class="eq-name">Technics SL-1200MK3D</div><div class="eq-spec">ダイレクトドライブ ターンテーブル</div></div><span class="eq-qty">×2</span></div><div class="eq-item"><div><div class="eq-name">Vestax R-3</div><div class="eq-spec">ロータリーアナログ ミキサー / レア機材</div></div><span class="eq-qty">×1</span></div></div></div>
+    <div class="eq-category"><div class="eq-cat-header"><span class="eq-cat-icon">⚡</span><div><h3>Amplifiers</h3><span>パワーアンプ</span></div></div><div class="eq-items"><div class="eq-item"><div><div class="eq-name">QSC GXD8</div><div class="eq-spec">2ch デジタルパワーアンプ / 800W×2</div></div><span class="eq-qty">×1</span></div><div class="eq-item"><div><div class="eq-name">QSC GXD4</div><div class="eq-spec">2ch デジタルパワーアンプ / 400W×2</div></div><span class="eq-qty">×1</span></div></div></div>
+  </div>
+</section>
+<section id="pricing">
+  <div class="section-title"><h2>Pricing</h2><div class="gold-line"></div><p>機材レンタル料金の目安（税込・配送別）</p></div>
+  <div class="price-grid">
+    <div class="price-card"><h3>Small Set</h3><div class="price">¥15,000〜</div><div class="price-unit">1日あたり</div><ul><li>Everse 8 ×2</li><li>小規模イベント向け</li><li>屋外・屋内対応</li><li>バッテリー内蔵</li></ul></div>
+    <div class="price-card"><h3>DJ Set</h3><div class="price">¥30,000〜</div><div class="price-unit">1日あたり</div><ul><li>CDJ-3000 ×2</li><li>DJM-A9 ×1</li><li>クラブ・パーティー向け</li><li>ターンテーブル追加可</li></ul></div>
+    <div class="price-card"><h3>Full PA Set</h3><div class="price">¥60,000〜</div><div class="price-unit">1日あたり</div><ul><li>ZX1-90 ×2 + Sb122 ×4</li><li>QSC アンプ込み</li><li>ライブ・大型イベント向け</li><li>設営・撤収対応可</li></ul></div>
+    <div class="price-card"><h3>All In One</h3><div class="price">要相談</div><div class="price-unit">Full PA + DJ フルセット</div><ul><li>全機材一括レンタル</li><li>オペレーター派遣対応</li><li>音響設計・チューニング込み</li><li>施設設置工事も対応</li></ul></div>
+  </div>
+  <p class="price-note">※ 上記は目安料金です。機材の組み合わせ・日数・配送エリアにより変動します。<br>まずはお気軽にお問い合わせください。見積もりは無料です。</p>
+</section>
+<section id="works">
+  <div class="section-title"><h2>Works</h2><div class="gold-line"></div><p>施工・設置・イベント音響実績</p></div>
+  <div class="works-grid">
+    <div class="work-card"><div class="work-thumb"><span class="work-thumb-icon">🎵</span><span class="work-badge">施工</span></div><div class="work-body"><h3>四季の音（Shikinone）</h3><p>浦添市矢富のライブ・イベントスペースへのサウンドシステム設計・設置。音響チューニング・REW測定対応。</p><div class="work-tags"><span class="work-tag">PA設置</span><span class="work-tag">音響設計</span><span class="work-tag">浦添</span></div></div></div>
+    <div class="work-card"><div class="work-thumb"><span class="work-thumb-icon">🌅</span><span class="work-badge">イベント</span></div><div class="work-body"><h3>SUNSET HOUSE</h3><p>宜野湾・Fish Tail Marinaでのサンセットハウスイベント。屋外PA・DJ機材フルセット提供・オペレーション。</p><div class="work-tags"><span class="work-tag">屋外PA</span><span class="work-tag">DJ機材</span><span class="work-tag">宜野湾</span></div></div></div>
+    <div class="work-card"><div class="work-thumb"><span class="work-thumb-icon">🏢</span><span class="work-badge">法人</span></div><div class="work-body"><h3>企業・施設イベント</h3><p>沖縄県内の企業イベント・商業施設・飲食店へのPA機材レンタル・音響オペレーション対応実績多数。</p><div class="work-tags"><span class="work-tag">企業向け</span><span class="work-tag">沖縄全域</span><span class="work-tag">オペレーター派遣</span></div></div></div>
+  </div>
+</section>
+<section id="terms" style="background:var(--gray);">
+  <div class="section-title"><h2>Rental Terms</h2><div class="gold-line"></div><p>レンタル規約 — ご利用前に必ずお読みください</p></div>
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="terms-block"><h3>第1条｜レンタル申込・確定</h3><ul><li>レンタルのご予約はお問い合わせフォーム・LINE・お電話にて承ります。</li><li>ご予約の確定は、当社からの確認連絡をもって成立とします。</li><li>初回ご利用時は身分証明書（運転免許証等）のご提示をお願いする場合があります。</li><li>法人・団体のお客様は会社名・担当者名をご明示ください。</li></ul></div>
+    <div class="terms-block"><h3>第2条｜料金・お支払い</h3><ul><li>レンタル料金は機材の種類・数量・レンタル日数により異なります。事前にお見積もりをご提示します。</li><li>配送料・設営費・撤収費は別途申し受けます。</li><li>お支払いは原則として機材お渡し前までに完了をお願いします。</li><li>お支払い方法は現金・銀行振込・各種キャッシュレス決済に対応しています。</li><li>デポジット（保証金）は案件の内容により申し受ける場合があります。</li></ul></div>
+    <div class="terms-block"><h3>第3条｜レンタル期間</h3><ul><li>レンタル期間は予約時にご確認の上、確定します。</li><li>返却が予定時刻を超える場合は、必ず事前にご連絡ください。</li><li>無断での延長は追加料金（1日分）を申し受けます。</li></ul></div>
+    <div class="terms-block"><h3>第4条｜配送・設営・撤収</h3><ul><li>配送・設営・撤収はすべて別途料金にて対応いたします。</li><li>対応エリアは沖縄本島全域です。離島については別途ご相談ください。</li><li>お客様ご自身でのお引き取り・返却も可能です（要事前調整）。</li></ul></div>
+    <div class="terms-block"><h3>第5条｜機材の取り扱い</h3><ul><li>機材はレンタル期間中、善良な管理者の注意をもってご使用ください。</li><li>機材の改造・第三者への転貸・水濡れ・定格を超えた使用は禁止します。</li><li>屋外でのご使用の場合は、雨天・強風対策を必ずお願いします。</li></ul></div>
+    <div class="terms-block"><h3>第6条｜破損・紛失・盗難</h3><ul><li>レンタル期間中に発生した機材の破損・紛失・盗難は、原因を問わずお客様のご負担となります。</li><li>修理費用は実費をご請求します。全損・紛失の場合は機材の再調達費用をご負担いただきます。</li><li>盗難の場合は速やかに警察へ届け出のうえ、当社へご連絡ください。</li></ul></div>
+    <div class="terms-block"><h3>第7条｜キャンセルポリシー</h3><ul><li>キャンセルの場合は速やかにご連絡ください。</li></ul><table class="terms-table"><thead><tr><th>キャンセル時期</th><th>キャンセル料</th></tr></thead><tbody><tr><td>8日前以前</td><td>無料</td></tr><tr><td>7〜4日前</td><td>レンタル料金の 30%</td></tr><tr><td>3〜2日前</td><td>レンタル料金の 50%</td></tr><tr><td>前日</td><td>レンタル料金の 80%</td></tr><tr><td>当日・無断キャンセル</td><td>レンタル料金の 100%</td></tr></tbody></table></div>
+    <div class="terms-block"><h3>第8条｜免責事項</h3><ul><li>天災・自然災害・停電等の不可抗力によるトラブルについて、当社は責任を負いかねます。</li><li>機材の使用方法の誤りによる損害・事故については、お客様の責任となります。</li></ul></div>
+    <div class="terms-block"><h3>第9条｜規約の変更</h3><ul><li>本規約は予告なく変更する場合があります。最新の規約はウェブサイトにてご確認ください。</li></ul></div>
+    <p style="text-align:center;margin-top:36px;font-size:0.82rem;color:var(--text-light);">制定：2024年　BENZO-SOUND（沖縄県浦添市）</p>
+  </div>
+</section>
+<section id="contact">
+  <div class="section-title"><h2>Contact</h2><div class="gold-line"></div><p>見積もり・お問い合わせ・ご相談はこちら。まずはお気軽に。</p></div>
+  <div class="contact-wrap">
+    <div class="form-row">
+      <div class="form-group"><label>お名前 *</label><input type="text" placeholder="山田 太郎"></div>
+      <div class="form-group"><label>電話番号</label><input type="tel" placeholder="090-0000-0000"></div>
+    </div>
+    <div class="form-group"><label>メールアドレス *</label><input type="email" placeholder="example@email.com"></div>
+    <div class="form-group"><label>お問い合わせ種別</label><select><option value="">選択してください</option><option>機材レンタルの見積もり</option><option>施設・店舗への音響設置</option><option>イベント音響オペレーション</option><option>その他</option></select></div>
+    <div class="form-group"><label>イベント日程・詳細</label><textarea placeholder="イベント内容・日程・会場・必要機材などをご記入ください。"></textarea></div>
+    <button class="btn-submit">送信する →</button>
+    <div class="sns-links">
+      <a href="#" class="sns-btn line">💬 LINE で相談</a>
+      <a href="#" class="sns-btn instagram">📷 Instagram</a>
+      <a href="#" class="sns-btn x">𝕏 Twitter / X</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="foot-logo">BENZO-SOUND<span>AUDIO DESIGN / OKINAWA</span></div>
+  <p>© 2024 BENZO-SOUND. All rights reserved.</p>
+</footer>
+</body>
+</html>
